@@ -7,7 +7,7 @@ import datetime
 from datetime import date
 import os
 
-DATABASE_URL = os.environ.get("DATABASE_URL", "postgresql://postgres:bourneultimatum19&2@db.nbpmdwuzuprbpvymzhyw.supabase.co:5432/postgres")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
 app = FastAPI()
