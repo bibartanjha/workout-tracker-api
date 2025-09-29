@@ -55,7 +55,7 @@ def get_recent_workouts(exercise, num_workouts):
             text(query),
             {"exercise": exercise, "num_workouts": num_workouts}
         )
-        rows = [Workout(**dict(row)) for row in result]
+        rows = [Workout(**row._mapping) for row in result]
     return [workout.valueswithlabels() for workout in rows]
 
 
@@ -63,5 +63,5 @@ def get_recent_workouts(exercise, num_workouts):
 def get_workouts():
     with engine.connect() as connection:
         result = connection.execute(text("select * FROM workout_records ORDER BY date DESC"))
-        rows = [Workout(**dict(row)) for row in result]
+        rows = [Workout(**row._mapping) for row in result]
     return [workout.valueswithlabels() for workout in rows]
