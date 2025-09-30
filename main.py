@@ -77,4 +77,17 @@ def get_categories(category):
         categories = [row[0] for row in result.fetchall()]
     return categories
 
+@app.post("/add_new_exercise_to_category")
+def add_exercise_category(exercise, category):
+    query = "INSERT INTO exercise_categories (exercise, category) VALUES (:exercise, :category) RETURNING exercise, category"
+
+    with engine.connect() as conn:
+        result = conn.execute(
+            text(query),
+            {"exercise": exercise, "category": category})
+        row = result.fetchone()
+    if row:
+        return {"exercise": row["exercise"], "category": row["category"]}
+    return {"error": "Insert failed"}
+
 
