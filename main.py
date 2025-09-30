@@ -65,3 +65,16 @@ def get_categories():
         result = connection.execute(text(query))
         categories = [row[0] for row in result.fetchall()]
     return categories
+
+@app.get("/exercises_in_category")
+def get_categories(category):
+    query = "SELECT exercise FROM exercise_categories WHERE category = :category"
+    with engine.connect() as connection:
+        result = connection.execute(
+            text(query),
+            {"category": category}
+        )
+        categories = [row[0] for row in result.fetchall()]
+    return categories
+
+
