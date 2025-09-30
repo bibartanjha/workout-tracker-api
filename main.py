@@ -65,3 +65,11 @@ def get_workouts():
         result = connection.execute(text("select * FROM workout_records ORDER BY date DESC"))
         rows = [Workout(**row._mapping) for row in result]
     return [workout.valueswithlabels() for workout in rows]
+
+@app.get("/categories")
+def get_categories():
+    query = "SELECT DISTINCT category FROM exercise_categories"
+    with engine.connect() as connection:
+        result = connection.execute(text(query))
+        categories = [row[0] for row in result.fetchall()]
+    return categories
