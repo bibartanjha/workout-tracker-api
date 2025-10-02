@@ -1,93 +1,74 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
-from sqlalchemy import create_engine, text
-from typing import List, Optional
+from typing import List
 
-import datetime
-from datetime import date
-import os
+from fastapi import FastAPI, Depends, HTTPException
+from sqlalchemy import inspect
+from sqlalchemy.orm import Session
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+import database
+from models import orm
+from models.orm import ExerciseCategoryRecord, WorkoutRecord
+from models.transform import db_row_to_workout, workout_to_db_row
+from models.workout import Workout
 
-engine = create_engine(DATABASE_URL)
+orm.Base.metadata.create_all(bind=database.engine)
 app = FastAPI()
 
-class Workout(BaseModel):
-    exercise: str
-    date: datetime.date = None
-    set1_weight: Optional[float] = None
-    set1_reps: Optional[int] = None
-    set2_weight: Optional[float] = None
-    set2_reps: Optional[int] = None
-    set3_weight: Optional[float] = None
-    set3_reps: Optional[int] = None
-    set4_weight: Optional[float] = None
-    set4_reps: Optional[int] = None
-    set5_weight: Optional[float] = None
-    set5_reps: Optional[int] = None
-    warmup_weight: Optional[float] = None
-    warmup_reps: Optional[int] = None
-    notes: Optional[str] = None
-
-    def valueswithlabels(self):
-        valuesList = [f"Exercise: {self.exercise}", f"Date: {self.date}"]
-        if (self.warmup_weight is not None) and (self.warmup_reps is not None):
-            valuesList.append(f"Warm-up: {self.warmup_weight} - {self.warmup_reps} reps")
-        if (self.set1_weight is not None) and (self.set1_reps is not None):
-            valuesList.append(f"Set 1: {self.set1_weight} - {self.set1_reps} reps")
-        if (self.set2_weight is not None) and (self.set2_reps is not None):
-            valuesList.append(f"Set 2: {self.set2_weight} - {self.set2_reps} reps")
-        if (self.set3_weight is not None) and (self.set3_reps is not None):
-            valuesList.append(f"Set 3: {self.set3_weight} - {self.set3_reps} reps")
-        if (self.set4_weight is not None) and (self.set4_reps is not None):
-            valuesList.append(f"Set 4: {self.set4_weight} - {self.set4_reps} reps")
-        if (self.set5_weight is not None) and (self.set5_reps is not None):
-            valuesList.append(f"Set 5: {self.set5_weight} - {self.set5_reps} reps")
-        if self.notes is not None:
-            valuesList.append(f"Notes: {self.notes}")
-        return valuesList
+def get_db():
+    db = database.SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 @app.get("/most_recent_workouts")
-def get_recent_workouts(exercise, num_workouts):
-    query = "SELECT * FROM workout_records WHERE exercise = :exercise ORDER BY date DESC LIMIT :num_workouts"
-    with engine.connect() as connection:
-        result = connection.execute(
-            text(query),
-            {"exercise": exercise, "num_workouts": num_workouts}
-        )
-        rows = [Workout(**row._mapping) for row in result]
-    return [workout.valueswithlabels() for workout in rows]
+def get_recent_workouts(exercise, num_workouts, db: Session = Depends(get_db)):
+    rows = db.query(WorkoutRecord).filter(WorkoutRecord.exercise == exercise).limit(num_workouts)
+    return [db_row_to_workout(row_to_dict(row)) for row in rows]
 
-@app.get("/categories")
-def get_categories():
-    query = "SELECT DISTINCT category FROM exercise_categories"
-    with engine.connect() as connection:
-        result = connection.execute(text(query))
-        categories = [row[0] for row in result.fetchall()]
-    return categories
+@app.get("/categories", response_model=List[str])
+def get_categories(db: Session = Depends(get_db)):
+    categories = db.query(ExerciseCategoryRecord.split_category).distinct().all()
+    return [c[0] for c in categories]
 
-@app.get("/exercises_in_category")
-def get_categories(category):
-    query = "SELECT exercise FROM exercise_categories WHERE category = :category"
-    with engine.connect() as connection:
-        result = connection.execute(
-            text(query),
-            {"category": category}
-        )
-        categories = [row[0] for row in result.fetchall()]
-    return categories
+@app.get("/exercises_in_category", response_model=List[str])
+def get_exercises_in_category(split_category: str, db: Session = Depends(get_db)):
+    rows = db.query(ExerciseCategoryRecord.exercise).filter(ExerciseCategoryRecord.split_category == split_category).all()
+    exercises = [row.exercise for row in rows]
+    return exercises
 
 @app.post("/add_new_exercise_to_category")
-def add_exercise_category(exercise, category):
-    query = "INSERT INTO exercise_categories (exercise, category) VALUES (:exercise, :category) RETURNING exercise, category"
+def add_exercise_category(exercise: str, split_category: str, db: Session = Depends(get_db)):
+    new_entry = ExerciseCategoryRecord(exercise=exercise, split_category=split_category)
+    db.add(new_entry)
+    db.commit()
+    db.refresh(new_entry)
 
-    with engine.connect() as conn:
-        result = conn.execute(
-            text(query),
-            {"exercise": exercise, "category": category})
-        row = result.fetchone()
-    if row:
-        return {"exercise": row["exercise"], "category": row["category"]}
-    return {"error": "Insert failed"}
+    if new_entry:
+        return {"exercise": new_entry.exercise, "split_category": new_entry.split_category}
+    else:
+        raise HTTPException(status_code=500, detail="Insert failed")
+
+@app.get("/workouts", response_model=List[Workout])
+def get_workouts(db: Session = Depends(get_db)):
+    rows = db.query(WorkoutRecord).all()
+    return [db_row_to_workout(row_to_dict(row)) for row in rows]
+
+def row_to_dict(row):
+    return {c.key: getattr(row, c.key) for c in inspect(row).mapper.column_attrs}
+
+
+@app.post("/workouts", response_model=Workout)
+def add_workout(workout: Workout, db: Session = Depends(get_db)):
+    row_data = workout_to_db_row(workout)
+    new_workout = WorkoutRecord(**row_data)
+
+    db.add(new_workout)
+    db.commit()
+    db.refresh(new_workout)
+
+    return db_row_to_workout(row_to_dict(new_workout))
+
+
+
 
 

@@ -4,11 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="" />
+    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="added add_new_exercise_to_category endpoint">
+      <change afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/orm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/transform.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/workout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -21,13 +38,54 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/sayantanj/Documents/workout-api",
+    "last_opened_file_path": "/Users/sayantanj/Documents/workout-tracker-api",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/models" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="workout-api" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="DATABASE_URL" value="postgresql://postgres.nbpmdwuzuprbpvymzhyw:bourneultimatum19&amp;2@aws-1-us-east-2.pooler.supabase.com:5432/postgres" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2">
+        <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_External Tools_pip install requirements" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -44,6 +102,64 @@
       <updated>1759035714729</updated>
       <workItem from="1759035716181" duration="122000" />
     </task>
+    <task id="LOCAL-00001" summary="update DATABASE_URL setting to use env variable">
+      <option name="closed" value="true" />
+      <created>1759105594771</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1759105594772</updated>
+    </task>
+    <task id="LOCAL-00002" summary="**row._mapping">
+      <option name="closed" value="true" />
+      <created>1759112892365</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1759112892366</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added get_categories">
+      <option name="closed" value="true" />
+      <created>1759201344452</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1759201344452</updated>
+    </task>
+    <task id="LOCAL-00004" summary="removed workouts endpoint">
+      <option name="closed" value="true" />
+      <created>1759201799241</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1759201799241</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added exercises_in_category endpoint">
+      <option name="closed" value="true" />
+      <created>1759210976260</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1759210976260</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added add_new_exercise_to_category endpoint">
+      <option name="closed" value="true" />
+      <created>1759211845414</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1759211845414</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update DATABASE_URL setting to use env variable" />
+    <MESSAGE value="**row._mapping" />
+    <MESSAGE value="added get_categories" />
+    <MESSAGE value="removed workouts endpoint" />
+    <MESSAGE value="added exercises_in_category endpoint" />
+    <MESSAGE value="added add_new_exercise_to_category endpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="added add_new_exercise_to_category endpoint" />
   </component>
 </project>
