@@ -8,7 +8,7 @@ class ExerciseCategoryRecord(Base):
     __table_args__ = {"schema": "split_days"}
 
     exercise = Column(String, primary_key=True, unique=True, nullable=False)
-    split_category = Column(String, primary_key=False, unique=True, nullable=False)
+    split_category = Column(String, nullable=False)
 
 
 class WorkoutRecord(Base):
@@ -16,9 +16,9 @@ class WorkoutRecord(Base):
     __table_args__ = {"schema": "exercise_records"}
 
     id = Column(UUID(as_uuid=True), primary_key=True, server_default="gen_random_uuid()")
-    category = Column(Text, nullable=True)
-    date = Column(Date, nullable=True)
-    exercise = Column(Text, nullable=True)
+    category = Column(Text)
+    date = Column(Date)
+    exercise = Column(Text)
     notes = Column(Text, nullable=True)
 
     warmup_weight = Column(NUMERIC, nullable=True)
