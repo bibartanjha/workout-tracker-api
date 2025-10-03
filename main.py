@@ -65,7 +65,7 @@ def row_to_dict(row):
     return {c.key: getattr(row, c.key) for c in inspect(row).mapper.column_attrs}
 
 
-@app.post("/workouts", response_model=Workout)
+@app.post("/add_workout", response_model=Workout)
 def add_workout(workout: Workout, db: Session = Depends(get_db)):
     row_data = workout_to_db_row(workout)
     new_workout = WorkoutRecord(**row_data)
