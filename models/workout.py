@@ -11,7 +11,6 @@ class Workout(BaseModel):
     exercise: str
     date: date
     category: str
-    warmup: ExerciseSet = None
     sets: List[ExerciseSet] = []
     notes: Optional[str] = None
 

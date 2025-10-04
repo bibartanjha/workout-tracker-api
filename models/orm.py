@@ -21,8 +21,6 @@ class WorkoutRecord(Base):
     exercise = Column(Text)
     notes = Column(Text, nullable=True)
 
-    warmup_weight = Column(NUMERIC, nullable=True)
-    warmup_reps = Column(Integer, nullable=True)
     set1_weight = Column(NUMERIC, nullable=True)
     set1_reps = Column(Integer, nullable=True)
     set2_weight = Column(NUMERIC, nullable=True)

@@ -15,17 +15,12 @@ def extract_sets(row: Dict[str, any]) -> List[ExerciseSet]:
 
 
 def db_row_to_workout(row: Dict[str, any]) -> Workout:
-    warmup = None
-    if row.get("warmup_weight") is not None and row.get("warmup_reps") is not None:
-        warmup = ExerciseSet(weight=row["warmup_weight"], reps=row["warmup_reps"])
-
     sets = extract_sets(row)
 
     return Workout(
         exercise=row["exercise"],
         date=row["date"],
         category=row.get("category"),
-        warmup=warmup,
         sets=sets,
         notes=row.get("notes"),
     )
@@ -36,9 +31,7 @@ def workout_to_db_row(workout: Workout) -> Dict[str, any]:
         "exercise": workout.exercise,
         "date": workout.date,
         "category": workout.category,
-        "notes": workout.notes if workout.notes else None,
-        "warmup_weight": workout.warmup.weight if workout.warmup else None,
-        "warmup_reps": workout.warmup.reps if workout.warmup else None,
+        "notes": workout.notes if workout.notes else None
     }
 
     for i, s in enumerate(workout.sets, start=1):
