@@ -16,7 +16,6 @@ class WorkoutRecord(Base):
     __table_args__ = {"schema": "exercise_records"}
 
     id = Column(UUID(as_uuid=True), primary_key=True, server_default="gen_random_uuid()")
-    category = Column(Text)
     date = Column(Date)
     exercise = Column(Text)
     notes = Column(Text, nullable=True)

@@ -10,7 +10,6 @@ class ExerciseSet(BaseModel):
 class Workout(BaseModel):
     exercise: str
     date: date
-    category: str
     sets: List[ExerciseSet] = []
     notes: Optional[str] = None
 

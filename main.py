@@ -76,4 +76,4 @@ def row_to_dict(row):
     return {c.key: getattr(row, c.key) for c in inspect(row).mapper.column_attrs}
 
 
-# Add another endpoint to get all exercises for a certain day and certain category(push,pull,legs). this is for the "all workouts done today" feature
+# Add another endpoint to get all exercises for a certain day. this is for the "all workouts done today" feature

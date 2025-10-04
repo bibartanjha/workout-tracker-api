@@ -20,7 +20,6 @@ def db_row_to_workout(row: Dict[str, any]) -> Workout:
     return Workout(
         exercise=row["exercise"],
         date=row["date"],
-        category=row.get("category"),
         sets=sets,
         notes=row.get("notes"),
     )
@@ -30,7 +29,6 @@ def workout_to_db_row(workout: Workout) -> Dict[str, any]:
     row = {
         "exercise": workout.exercise,
         "date": workout.date,
-        "category": workout.category,
         "notes": workout.notes if workout.notes else None
     }
 
