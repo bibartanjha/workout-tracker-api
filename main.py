@@ -76,4 +76,7 @@ def row_to_dict(row):
     return {c.key: getattr(row, c.key) for c in inspect(row).mapper.column_attrs}
 
 
-# Add another endpoint to get all exercises for a certain day. this is for the "all workouts done today" feature
+@app.get("/workouts_by_date", response_model=List[Workout])
+def get_workouts_by_date(date: str, db: Session = Depends(get_db)):
+    rows = db.query(WorkoutRecord).filter(WorkoutRecord.Date == date).all()
+    return [db_row_to_workout(row_to_dict(row)) for row in rows]
