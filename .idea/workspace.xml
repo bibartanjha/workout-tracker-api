@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="removed category from exercise">
+    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="fixed errors in get_recent_workouts">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -189,7 +189,39 @@
       <option name="project" value="LOCAL" />
       <updated>1759548396750</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="added endpoint for get_workouts_by_date">
+      <option name="closed" value="true" />
+      <created>1759701542055</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1759701542055</updated>
+    </task>
+    <task id="LOCAL-00013" summary="updated get_recent_workout to sort by date">
+      <option name="closed" value="true" />
+      <created>1759701582855</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1759701582855</updated>
+    </task>
+    <task id="LOCAL-00014" summary="updated get_recent_workouts">
+      <option name="closed" value="true" />
+      <created>1759701645041</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1759701645041</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fixed errors in get_recent_workouts">
+      <option name="closed" value="true" />
+      <created>1759701660915</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1759701660915</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -204,6 +236,10 @@
     <MESSAGE value="refactor" />
     <MESSAGE value="remove warmup" />
     <MESSAGE value="removed category from exercise" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed category from exercise" />
+    <MESSAGE value="added endpoint for get_workouts_by_date" />
+    <MESSAGE value="updated get_recent_workout to sort by date" />
+    <MESSAGE value="updated get_recent_workouts" />
+    <MESSAGE value="fixed errors in get_recent_workouts" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed errors in get_recent_workouts" />
   </component>
 </project>
