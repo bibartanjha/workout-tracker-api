@@ -50,7 +50,7 @@ def add_workout(workout: Workout, db: Session = Depends(get_db)):
 
 @app.get("/most_recent_workouts", response_model=Workout)
 def get_recent_workouts(exercise: str, num_workouts: int, db: Session = Depends(get_db)):
-    row = db.query(WorkoutRecord).filter(WorkoutRecord.exercise == exercise).order_by(WorkoutRecord.Date.desc()).limit(num_workouts)
+    rows = db.query(WorkoutRecord).filter(WorkoutRecord.exercise == exercise).order_by(WorkoutRecord.Date.desc()).limit(num_workouts)
     return [db_row_to_workout(row_to_dict(row)) for row in rows]
 
 @app.post("/add_new_exercise_to_category")
