@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="fixed errors in get_recent_workouts">
+    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="added sqlalchemyerror exception handling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -221,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759701660915</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="added sqlalchemyerror exception handling">
+      <option name="closed" value="true" />
+      <created>1759705259040</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1759705259040</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -240,6 +248,7 @@
     <MESSAGE value="updated get_recent_workout to sort by date" />
     <MESSAGE value="updated get_recent_workouts" />
     <MESSAGE value="fixed errors in get_recent_workouts" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed errors in get_recent_workouts" />
+    <MESSAGE value="added sqlalchemyerror exception handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="added sqlalchemyerror exception handling" />
   </component>
 </project>

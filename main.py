@@ -59,9 +59,9 @@ def add_workout(workout: Workout, db: Session = Depends(get_db)):
 
     return db_row_to_workout(row_to_dict(new_workout))
 
-@app.get("/most_recent_workouts", response_model=Workout)
+@app.get("/most_recent_workouts", response_model=List[Workout])
 def get_recent_workouts(exercise: str, num_workouts: int, db: Session = Depends(get_db)):
-    rows = db.query(WorkoutRecord).filter(WorkoutRecord.exercise == exercise).order_by(WorkoutRecord.Date.desc()).limit(num_workouts)
+    rows = db.query(WorkoutRecord).filter(WorkoutRecord.exercise == exercise).order_by(WorkoutRecord.date.desc()).limit(num_workouts)
     return [db_row_to_workout(row_to_dict(row)) for row in rows]
 
 @app.post("/add_new_exercise_to_category")
@@ -85,5 +85,5 @@ def row_to_dict(row):
 
 @app.get("/workouts_by_date", response_model=List[Workout])
 def get_workouts_by_date(date: str, db: Session = Depends(get_db)):
-    rows = db.query(WorkoutRecord).filter(WorkoutRecord.Date == date).all()
+    rows = db.query(WorkoutRecord).filter(WorkoutRecord.date == date).all()
     return [db_row_to_workout(row_to_dict(row)) for row in rows]
