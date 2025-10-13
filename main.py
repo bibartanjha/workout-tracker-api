@@ -88,8 +88,8 @@ def get_workouts_by_date(date: str, db: Session = Depends(get_db)):
 # WorkoutPlan endpoints:
 
 @app.post("/add_workout_plan", response_model=WorkoutPlan)
-def add_workout_plan(exercise: str, day_number: int, db: Session = Depends(get_db)):
-    new_plan = WorkoutPlan(exercise=exercise, day_number=day_number)
+def add_workout_plan(exercise: str, day_number: int, plan_description: str, db: Session = Depends(get_db)):
+    new_plan = WorkoutPlan(exercise=exercise, day_number=day_number, plan_description=plan_description)
     row_data = workout_plan_to_db_row(new_plan)
     new_workout_plan = WorkoutPlanRecord(**row_data)
 
@@ -131,3 +131,8 @@ def get_workout_plans(exercise: str, db: Session = Depends(get_db)):
     )
 
     return [db_row_to_workout_plan(row_to_dict(workout_plan)) for workout_plan in workout_plans]
+
+@app.post("/get_all_exercises_with_plans", response_model=List[str])
+def get_all_exercises_with_plans(db: Session = Depends(get_db)):
+    exercises = db.query(WorkoutPlanRecord.exercise).distinct().all()
+    return [e[0] for e in exercises]
