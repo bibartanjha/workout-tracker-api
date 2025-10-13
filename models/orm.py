@@ -40,6 +40,7 @@ class WorkoutPlanRecord(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, server_default="gen_random_uuid()")
     exercise = Column(Text)
     day_number = Column(SMALLINT)
+    plan_description = Column(Text)
     completed = Column(Boolean, default=False, nullable=True)
     date_completed = Column(Date, nullable=True)
 
