@@ -1,5 +1,6 @@
+from sqlalchemy.dialects.mysql import SMALLINT
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy import Column, Date, String, Integer, Text, NUMERIC
+from sqlalchemy import Column, Date, String, Integer, Text, NUMERIC, Boolean
 
 from database import Base
 
@@ -30,5 +31,17 @@ class WorkoutRecord(Base):
     set4_reps = Column(Integer, nullable=True)
     set5_weight = Column(NUMERIC, nullable=True)
     set5_reps = Column(Integer, nullable=True)
+
+
+class WorkoutPlanRecord(Base):
+    __tablename__ = "v1a_workout_plans"
+    __table_args__ = {"schema": "workout_plans"}
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default="gen_random_uuid()")
+    exercise = Column(Text)
+    day_number = Column(SMALLINT)
+    completed = Column(Boolean, default=False, nullable=True)
+    date_completed = Column(Date, nullable=True)
+
 
 
