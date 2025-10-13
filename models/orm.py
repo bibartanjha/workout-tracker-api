@@ -41,7 +41,6 @@ class WorkoutPlanRecord(Base):
     exercise = Column(Text)
     day_number = Column(SMALLINT)
     plan_description = Column(Text)
-    completed = Column(Boolean, default=False, nullable=True)
     date_completed = Column(Date, nullable=True)
 
 

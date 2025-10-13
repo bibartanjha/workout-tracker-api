@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="added endpoints for workout plans">
+    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="plan_description field and more endpoints">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/orm.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/orm.py" afterDir="false" />
@@ -248,7 +248,23 @@
       <option name="project" value="LOCAL" />
       <updated>1760330737111</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="plan_description field and more endpoints">
+      <option name="closed" value="true" />
+      <created>1760332940218</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1760332940218</updated>
+    </task>
+    <task id="LOCAL-00020" summary="plan_description field and more endpoints">
+      <option name="closed" value="true" />
+      <created>1760332943690</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1760332943690</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -270,6 +286,7 @@
     <MESSAGE value="added sqlalchemyerror exception handling" />
     <MESSAGE value="fixed errors in new get requests" />
     <MESSAGE value="added endpoints for workout plans" />
-    <option name="LAST_COMMIT_MESSAGE" value="added endpoints for workout plans" />
+    <MESSAGE value="plan_description field and more endpoints" />
+    <option name="LAST_COMMIT_MESSAGE" value="plan_description field and more endpoints" />
   </component>
 </project>

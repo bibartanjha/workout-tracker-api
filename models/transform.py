@@ -50,7 +50,6 @@ def workout_plan_to_db_row(workout_plan: WorkoutPlan) -> Dict[str, any]:
         "exercise": workout_plan.exercise,
         "day_number": workout_plan.day_number,
         "plan_description": workout_plan.plan_description,
-        "completed": workout_plan.completed if workout_plan.completed else False,
         "date_completed": workout_plan.date_completed if workout_plan.date_completed else None
     }
     return row
@@ -60,6 +59,5 @@ def db_row_to_workout_plan(row: Dict[str, any]) -> WorkoutPlan:
         exercise=row["exercise"],
         day_number=row["day_number"],
         plan_description=row["plan_description"],
-        completed=row["completed"],
         date_completed=row["date_completed"]
     )

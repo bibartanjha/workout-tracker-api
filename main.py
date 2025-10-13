@@ -114,7 +114,6 @@ def set_workout_plan_as_complete(exercise: str, day_number: int, date_completed:
     if not workout_plan:
         raise HTTPException(status_code=404, detail="Workout plan not found in DB")
 
-    workout_plan.completed = True
     workout_plan.date_completed = date_completed
     db.commit()
     db.refresh(workout_plan)
