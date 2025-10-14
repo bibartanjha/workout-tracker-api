@@ -120,7 +120,7 @@ def set_workout_plan_as_complete(exercise: str, day_number: int, date_completed:
 
     return db_row_to_workout_plan(row_to_dict(workout_plan))
 
-@app.post("/get_workout_plans", response_model=List[WorkoutPlan])
+@app.get("/get_workout_plans", response_model=List[WorkoutPlan])
 def get_workout_plans(exercise: str, db: Session = Depends(get_db)):
     workout_plans = (
         db.query(WorkoutPlanRecord)
