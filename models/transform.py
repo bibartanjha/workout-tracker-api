@@ -2,7 +2,7 @@ from typing import Dict, List
 from sqlalchemy import inspect
 
 from models.workout import ExerciseSet, Workout
-from models.workoutplan import WorkoutPlan
+from models.workoutplanday import WorkoutPlanDay
 
 
 def extract_sets(row: Dict[str, any]) -> List[ExerciseSet]:
@@ -45,19 +45,19 @@ def row_to_dict(row):
     return {c.key: getattr(row, c.key) for c in inspect(row).mapper.column_attrs}
 
 
-def workout_plan_to_db_row(workout_plan: WorkoutPlan) -> Dict[str, any]:
+def workout_plan_day_to_db_row(workout_plan_day: WorkoutPlanDay) -> Dict[str, any]:
     row = {
-        "exercise": workout_plan.exercise,
-        "day_number": workout_plan.day_number,
-        "plan_description": workout_plan.plan_description,
-        "date_completed": workout_plan.date_completed if workout_plan.date_completed else None
+        "exercise": workout_plan_day.exercise,
+        "day_number": workout_plan_day.day_number,
+        "plan_day_description": workout_plan_day.plan_day_description,
+        "date_completed": workout_plan_day.date_completed if workout_plan_day.date_completed else None
     }
     return row
 
-def db_row_to_workout_plan(row: Dict[str, any]) -> WorkoutPlan:
-    return WorkoutPlan(
+def db_row_to_workout_plan_day(row: Dict[str, any]) -> WorkoutPlanDay:
+    return WorkoutPlanDay(
         exercise=row["exercise"],
         day_number=row["day_number"],
-        plan_description=row["plan_description"],
+        plan_day_description=row["plan_day_description"],
         date_completed=row["date_completed"]
     )

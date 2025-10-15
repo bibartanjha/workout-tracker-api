@@ -8,11 +8,11 @@ from starlette.responses import JSONResponse
 
 import database
 from models import orm
-from models.orm import ExerciseCategoryRecord, WorkoutRecord, WorkoutPlanRecord
-from models.transform import db_row_to_workout, workout_to_db_row, row_to_dict, workout_plan_to_db_row, \
-    db_row_to_workout_plan
+from models.orm import ExerciseCategoryRecord, WorkoutPlanDayRecord, WorkoutRecord
+from models.transform import db_row_to_workout, workout_to_db_row, row_to_dict, workout_plan_day_to_db_row, \
+    db_row_to_workout_plan_day
 from models.workout import Workout
-from models.workoutplan import WorkoutPlan
+from models.workoutplanday import WorkoutPlanDay
 
 orm.Base.metadata.create_all(bind=database.engine)
 app = FastAPI()
@@ -85,53 +85,53 @@ def get_workouts_by_date(date: str, db: Session = Depends(get_db)):
     return [db_row_to_workout(row_to_dict(row)) for row in rows]
 
 
-# WorkoutPlan endpoints:
+# WorkoutPlanDay endpoints:
 
-@app.post("/add_workout_plan", response_model=WorkoutPlan)
-def add_workout_plan(exercise: str, day_number: int, plan_description: str, db: Session = Depends(get_db)):
-    new_plan = WorkoutPlan(exercise=exercise, day_number=day_number, plan_description=plan_description)
-    row_data = workout_plan_to_db_row(new_plan)
-    new_workout_plan = WorkoutPlanRecord(**row_data)
+@app.post("/add_workout_plan_day", response_model=WorkoutPlanDay)
+def add_workout_plan_day(exercise: str, day_number: int, plan_day_description: str, db: Session = Depends(get_db)):
+    new_plan_day = WorkoutPlanDay(exercise=exercise, day_number=day_number, plan_day_description=plan_day_description)
+    row_data = workout_plan_day_to_db_row(new_plan_day)
+    new_workout_plan_day = WorkoutPlanDayRecord(**row_data)
 
-    db.add(new_workout_plan)
+    db.add(new_workout_plan_day)
     db.commit()
-    db.refresh(new_workout_plan)
+    db.refresh(new_workout_plan_day)
 
-    return db_row_to_workout_plan(row_to_dict(new_workout_plan))
+    return db_row_to_workout_plan_day(row_to_dict(new_workout_plan_day))
 
 
-@app.post("/set_workout_plan_as_complete", response_model=WorkoutPlan)
-def set_workout_plan_as_complete(exercise: str, day_number: int, date_completed: date, db: Session = Depends(get_db)):
-    workout_plan = (
-        db.query(WorkoutPlanRecord)
+@app.post("/set_workout_plan_day_as_complete", response_model=WorkoutPlanDay)
+def set_workout_plan_day_as_complete(exercise: str, day_number: int, date_completed: date, db: Session = Depends(get_db)):
+    workout_plan_day = (
+        db.query(WorkoutPlanDayRecord)
         .filter(
-            WorkoutPlanRecord.exercise == exercise,
-            WorkoutPlanRecord.day_number == day_number
+            WorkoutPlanDayRecord.exercise == exercise,
+            WorkoutPlanDayRecord.day_number == day_number
         )
         .first()
     )
 
-    if not workout_plan:
-        raise HTTPException(status_code=404, detail="Workout plan not found in DB")
+    if not workout_plan_day:
+        raise HTTPException(status_code=404, detail="Workout plan day not found in DB")
 
-    workout_plan.date_completed = date_completed
+    workout_plan_day.date_completed = date_completed
     db.commit()
-    db.refresh(workout_plan)
+    db.refresh(workout_plan_day)
 
-    return db_row_to_workout_plan(row_to_dict(workout_plan))
+    return db_row_to_workout_plan_day(row_to_dict(workout_plan_day))
 
-@app.get("/get_workout_plans", response_model=List[WorkoutPlan])
-def get_workout_plans(exercise: str, db: Session = Depends(get_db)):
-    workout_plans = (
-        db.query(WorkoutPlanRecord)
-        .filter(WorkoutPlanRecord.exercise == exercise)
-        .order_by(WorkoutPlanRecord.day_number)
+@app.get("/get_workout_plan_for_exercise", response_model=List[WorkoutPlanDay])
+def get_workout_plan_for_exercise(exercise: str, db: Session = Depends(get_db)):
+    workout_plan = (
+        db.query(WorkoutPlanDayRecord)
+        .filter(WorkoutPlanDayRecord.exercise == exercise)
+        .order_by(WorkoutPlanDayRecord.day_number)
         .all()
     )
 
-    return [db_row_to_workout_plan(row_to_dict(workout_plan)) for workout_plan in workout_plans]
+    return [db_row_to_workout_plan_day(row_to_dict(workout_plan_day)) for workout_plan_day in workout_plan]
 
 @app.get("/get_all_exercises_with_plans", response_model=List[str])
 def get_all_exercises_with_plans(db: Session = Depends(get_db)):
-    exercises = db.query(WorkoutPlanRecord.exercise).distinct().all()
+    exercises = db.query(WorkoutPlanDayRecord.exercise).distinct().all()
     return [e[0] for e in exercises]

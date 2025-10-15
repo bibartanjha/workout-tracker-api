@@ -33,14 +33,14 @@ class WorkoutRecord(Base):
     set5_reps = Column(Integer, nullable=True)
 
 
-class WorkoutPlanRecord(Base):
+class WorkoutPlanDayRecord(Base):
     __tablename__ = "v1a_workout_plans"
     __table_args__ = {"schema": "workout_plans"}
 
     id = Column(UUID(as_uuid=True), primary_key=True, server_default="gen_random_uuid()")
     exercise = Column(Text)
     day_number = Column(SMALLINT)
-    plan_description = Column(Text)
+    plan_day_description = Column(Text)
     date_completed = Column(Date, nullable=True)
 
 
