@@ -1,7 +1,7 @@
 from datetime import date
 from typing import List
 
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 from starlette.responses import JSONResponse
@@ -99,6 +99,21 @@ def add_workout_plan_day(exercise: str, day_number: int, plan_day_description: s
 
     return db_row_to_workout_plan_day(row_to_dict(new_workout_plan_day))
 
+@app.post("/delete_workout_plan", response_model=List[WorkoutPlanDay])
+def delete_workout_plan(exercise: str, db: Session = Depends(get_db)):
+    workout_plan_days = (
+        db.query(WorkoutPlanDayRecord)
+        .filter(WorkoutPlanDayRecord.exercise == exercise)
+        .all()
+    )
+
+    for workout_plan_day in workout_plan_days:
+        db.delete(workout_plan_day)
+
+    db.commit()
+
+    return [db_row_to_workout_plan_day(row_to_dict(day)) for day in workout_plan_days]
+
 
 @app.post("/set_workout_plan_day_as_complete", response_model=WorkoutPlanDay)
 def set_workout_plan_day_as_complete(exercise: str, day_number: int, date_completed: date, db: Session = Depends(get_db)):
@@ -110,9 +125,6 @@ def set_workout_plan_day_as_complete(exercise: str, day_number: int, date_comple
         )
         .first()
     )
-
-    if not workout_plan_day:
-        raise HTTPException(status_code=404, detail="Workout plan day not found in DB")
 
     workout_plan_day.date_completed = date_completed
     db.commit()

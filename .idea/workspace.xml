@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="change endpoint to get">
+    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="renamed workoutplan to workoutplanday and updated column name to include day">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/orm.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/orm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/transform.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/transform.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/workoutplan.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/workoutplanday.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760416217404</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="renamed workoutplan to workoutplanday and updated column name to include day">
+      <option name="closed" value="true" />
+      <created>1760511005944</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1760511005944</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -313,6 +318,18 @@
     <MESSAGE value="plan_description field and more endpoints" />
     <MESSAGE value="removed completed parameter" />
     <MESSAGE value="change endpoint to get" />
-    <option name="LAST_COMMIT_MESSAGE" value="change endpoint to get" />
+    <MESSAGE value="renamed workoutplan to workoutplanday and updated column name to include day" />
+    <option name="LAST_COMMIT_MESSAGE" value="renamed workoutplan to workoutplanday and updated column name to include day" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>135</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
