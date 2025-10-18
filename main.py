@@ -8,7 +8,7 @@ from starlette.responses import JSONResponse
 
 import database
 from models import orm
-from models.orm import ExerciseCategoryRecord, WorkoutPlanDayRecord, WorkoutRecord
+from models.orm import ExerciseCategoryRecord, WorkoutPlanDayRecord, WorkoutRecord, ExerciseThatHasPlanRecord
 from models.transform import db_row_to_workout, workout_to_db_row, row_to_dict, workout_plan_day_to_db_row, \
     db_row_to_workout_plan_day
 from models.workout import Workout
@@ -143,7 +143,7 @@ def get_workout_plan_for_exercise(exercise: str, db: Session = Depends(get_db)):
 
     return [db_row_to_workout_plan_day(row_to_dict(workout_plan_day)) for workout_plan_day in workout_plan]
 
-@app.get("/get_all_exercises_with_plans", response_model=List[str])
+@app.get("/get_all_exercises_that_have_plans", response_model=List[str])
 def get_all_exercises_with_plans(db: Session = Depends(get_db)):
-    exercises = db.query(WorkoutPlanDayRecord.exercise).distinct().all()
+    exercises = db.query(ExerciseThatHasPlanRecord.exercise).all()
     return [e[0] for e in exercises]

@@ -44,4 +44,8 @@ class WorkoutPlanDayRecord(Base):
     date_completed = Column(Date, nullable=True)
 
 
+class ExerciseThatHasPlanRecord(Base):
+    __tablename__ = "v1a_exercises_that_have_plans"
+    __table_args__ = {"schema": "workout_plans"}
 
+    exercise = Column(Text, primary_key=True)

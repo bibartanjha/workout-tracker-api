@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="renamed workoutplan to workoutplanday and updated column name to include day">
+    <list default="true" id="87056870-6ab7-4c9f-b8d2-58ce02d01baa" name="Changes" comment="add delete workout plan endpoint">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/orm.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/orm.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,7 +294,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760511005944</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="add delete workout plan endpoint">
+      <option name="closed" value="true" />
+      <created>1760730157260</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1760730157260</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -319,17 +328,7 @@
     <MESSAGE value="removed completed parameter" />
     <MESSAGE value="change endpoint to get" />
     <MESSAGE value="renamed workoutplan to workoutplanday and updated column name to include day" />
-    <option name="LAST_COMMIT_MESSAGE" value="renamed workoutplan to workoutplanday and updated column name to include day" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>135</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="add delete workout plan endpoint" />
+    <option name="LAST_COMMIT_MESSAGE" value="add delete workout plan endpoint" />
   </component>
 </project>
